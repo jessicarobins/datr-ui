@@ -1,17 +1,18 @@
 <template>
   <div class="home">
     <img src="../assets/logo.png">
-    <Activity />
+    <Place type="activity" />
+    <Place type="food" />
   </div>
 </template>
 
 <script>
-import Activity from '@/components/Activity.vue'
+import Place from '@/components/Place.vue'
 
 export default {
   name: 'home',
   components: {
-    Activity
+    Place
   }
 }
 </script>

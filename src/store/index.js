@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import activities from './modules/activities'
+import place from './modules/place'
 
 Vue.use(Vuex)
 
+const getters = {
+  place: state => type => state.place[type]
+}
+
 export default new Vuex.Store({
+  getters,
   modules: {
-    activities
+    place
   }
 })

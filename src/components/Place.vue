@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    activity will go here
+    <h1>{{ place(type) }}</h1>
   </div>
 </template>
 
@@ -9,15 +8,18 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Activity',
+  name: 'Place',
   computed: mapGetters([
-    'activity'
+    'place'
   ]),
   methods: mapActions([
-    'getActivity'
+    'getPlace'
   ]),
+  props: {
+    type: String
+  },
   created() {
-    this.$store.dispatch('getActivity')
+    this.$store.dispatch('getPlace', this.type)
   }
 }
 </script>

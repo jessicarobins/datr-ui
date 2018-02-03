@@ -4,8 +4,12 @@ import { GET_ACTIVITY } from '../types'
 // actions
 const actions = {
   async getActivity({ commit }) {
-    const activity = await api('/places/activity')
-    commit(GET_ACTIVITY, { activity })
+    try {
+      const activity = await api('/places/activity')
+      commit(GET_ACTIVITY, activity)
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
