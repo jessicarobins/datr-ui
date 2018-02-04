@@ -23,7 +23,8 @@ const mutations = {
 // initial state
 const state = {
   activity: {},
-  food: {}
+  food: {},
+  night: {}
 }
 
 export default {

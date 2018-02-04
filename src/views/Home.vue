@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
-    <Place type="activity" />
-    <Place type="food" />
+    <Place type="food" step="1" />
+    <Place type="activity" step="2" />
+    <Place type="night" step="3" />
   </div>
 </template>
 

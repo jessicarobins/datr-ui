@@ -1,21 +1,25 @@
 <template>
   <div>
-    <h1>{{ place(type) }}</h1>
+    <h1>{{ step }}: <a :href="place.website" target="_blank">{{ place.name }}</a></h1>
+    <p>{{ place.formatted_address }}</p>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Place',
-  computed: mapGetters([
-    'place'
-  ]),
+  computed: {
+    place() {
+      return this.$store.getters.place(this.type)
+    }
+  },
   methods: mapActions([
     'getPlace'
   ]),
   props: {
+    step: String,
     type: String
   },
   created() {
@@ -29,15 +33,8 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
+  text-decoration: none
 }
 </style>
