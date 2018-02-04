@@ -6,24 +6,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'Place',
-  computed: {
-    place() {
-      return this.$store.getters.place(this.type)
-    }
-  },
-  methods: mapActions([
-    'getPlace'
-  ]),
   props: {
+    place: Object,
     step: String,
     type: String
-  },
-  created() {
-    this.$store.dispatch('getPlace', this.type)
   }
 }
 </script>

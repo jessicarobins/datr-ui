@@ -3,10 +3,10 @@ import { GET_PLACE } from '../types'
 
 // actions
 const actions = {
-  async getPlace({ commit }, type) {
+  async getPlaces({ commit }) {
     try {
-      const place = await api(`/places/${type}`)
-      commit(GET_PLACE, { place, type })
+      const place = await api('/places')
+      commit(GET_PLACE, { place })
     } catch (err) {
       console.log(err)
     }
@@ -15,16 +15,18 @@ const actions = {
 
 // mutations
 const mutations = {
-  [GET_PLACE](state, { place, type }) {
-    state[type] = place[type]
+  [GET_PLACE](state, { place }) {
+    state.activity = place.activity
+    state.food = place.food
+    state.night = place.night
   }
 }
 
 // initial state
 const state = {
-  activity: {},
-  food: {},
-  night: {}
+  activity: undefined,
+  food: undefined,
+  night: undefined
 }
 
 export default {
