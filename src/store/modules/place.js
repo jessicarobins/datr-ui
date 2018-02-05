@@ -1,12 +1,15 @@
 import api from '@/services/Api'
-import { GET_PLACE } from '../types'
+import { GET_PLACES } from '../types'
 
 // actions
 const actions = {
-  async getPlaces({ commit }) {
+  async getPlaces({ dispatch, commit, rootGetters }) {
     try {
-      const place = await api('/places')
-      commit(GET_PLACE, { place })
+      await dispatch('getLocation', null, { root: true })
+      const place = await api('/places', {
+        params: rootGetters.location
+      })
+      commit(GET_PLACES, place)
     } catch (err) {
       console.log(err)
     }
@@ -15,10 +18,10 @@ const actions = {
 
 // mutations
 const mutations = {
-  [GET_PLACE](state, { place }) {
-    state.activity = place.activity
-    state.food = place.food
-    state.night = place.night
+  [GET_PLACES](state, { activity, food, night }) {
+    state.activity = activity
+    state.food = food
+    state.night = night
   }
 }
 
