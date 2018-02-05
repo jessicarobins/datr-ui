@@ -5,18 +5,21 @@
       <Place type="activity" step="2" :place="place('activity')"/>
       <Place type="night" step="3" :place="place('night')" />
     </div>
-    <button @click="getPlaces">Go!</button>
+    <Wheel />
+    <v-btn @click="getPlaces" round color="primary" dark>Go!</v-btn>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Place from './Place.vue'
+import Wheel from './Wheel.vue'
 
 export default {
   name: 'Places',
   components: {
-    Place
+    Place,
+    Wheel
   },
   computed: {
     hasData() {
