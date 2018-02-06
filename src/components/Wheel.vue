@@ -5,11 +5,36 @@
 </template>
 
 <script>
+
 export default {
   name: 'Wheel',
   data() {
     return {
-      handleDown: false
+      handleDown: false,
+      items: [
+        'local_bar',
+        'local_cafe',
+        'local_dining',
+        'local_drink',
+        'local_pizza',
+        'restaurant',
+        'restaurant_menu',
+        'cake', 8, 9],
+      activityItems: [
+        'local_library',
+        'local_mall',
+        'local_movies',
+        'local_activity',
+        'local_see',
+        'terrain',
+        'palette',
+        'musical_note',
+        'beach_access',
+        'pool',
+        'casino',
+        'spa',
+        'golf_course'
+      ]
     }
   },
   computed: {
