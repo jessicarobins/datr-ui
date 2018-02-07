@@ -1,12 +1,14 @@
 <template>
   <div>
     <div v-if="hasData">
-      <Place type="food" step="1" :place="place('food')" />
-      <Place type="activity" step="2" :place="place('activity')"/>
-      <Place type="night" step="3" :place="place('night')" />
+      <Place type="food" :place="place('food')" />
+      <Place type="activity" :place="place('activity')"/>
+      <Place type="night" :place="place('night')" />
     </div>
-    <SlotMachine :items="items" />
-    <v-btn @click="getPlaces" round color="primary" dark>Go!</v-btn>
+    <SlotMachine
+      :items="items"
+      :getPlaces="getPlaces"
+      :placeItems="placeItems" />
   </div>
 </template>
 
@@ -33,6 +35,17 @@ export default {
     },
     place() {
       return type => this.$store.getters.place(type)
+    },
+    placeItems() {
+      if (this.hasData) {
+        return [
+          this.place('food'),
+          this.place('activity'),
+          this.place('night')
+        ]
+      }
+
+      return []
     }
   },
   methods: mapActions([

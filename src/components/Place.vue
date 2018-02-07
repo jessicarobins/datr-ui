@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ step }}: <a :href="place.website" target="_blank">{{ place.name }}</a></h1>
+    <h1><a :href="place.website" target="_blank">{{ place.name }}</a></h1>
     <p>{{ place.formatted_address }}</p>
   </div>
 </template>

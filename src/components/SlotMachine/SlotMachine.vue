@@ -26,7 +26,9 @@ export default {
     SlotMachineWheel
   },
   props: {
-    items: Array
+    getPlaces: Function,
+    items: Array,
+    placeItems: Array
   },
   data() {
     return {
@@ -68,9 +70,20 @@ export default {
     toggle() {
       this.handleDown = true
       this.spin()
-      setTimeout(() => {
-        this.handleDown = false
-      }, 2000)
+      this.getPlaces()
+        .then(() => {
+          this.handleDown = false
+          this.items[0].splice(this.indices[0], 0, this.placeItems[0])
+          this.items[1].splice(this.indices[1], 0, this.placeItems[1])
+          this.items[2].splice(this.indices[2], 0, this.placeItems[2])
+          const newIndices = [
+            this.indices[0] + 1,
+            this.indices[1] + 1,
+            this.indices[2] + 1
+          ]
+
+          this.indices = newIndices
+        })
     }
   }
 }
@@ -105,7 +118,7 @@ $bg-color: rgba(64, 64, 64, 1);
   height: $height;
   min-width: 350px;
   position: relative;
-  width: calc(#{$height} * 4 / 3);
+  width: calc(#{$height} * 8 / 5);
 }
 
 .slot-machine:before {

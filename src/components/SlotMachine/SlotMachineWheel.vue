@@ -2,13 +2,13 @@
   <div class="wheel-container">
     <div class="wheel">
       <div>
-        <v-icon>{{ prevItem }}</v-icon>
+        <SlotMachineWheelItem :item="prevItem" />
       </div>
       <div>
-        <v-icon>{{ item }}</v-icon>
+        <SlotMachineWheelItem :item="item" />
       </div>
       <div>
-        <v-icon>{{ nextItem }}</v-icon>
+        <SlotMachineWheelItem :item="nextItem" />
       </div>
     </div>
   </div>
@@ -16,9 +16,13 @@
 
 <script>
 import TWEEN from '@tweenjs/tween.js'
+import SlotMachineWheelItem from './SlotMachineWheelItem.vue'
 
 export default {
   name: 'SlotMachineWheel',
+  components: {
+    SlotMachineWheelItem
+  },
   props: {
     index: Number,
     items: Array,
@@ -70,10 +74,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-i {
-  font-size: 10vh;
-}
-
 .wheel {
   align-items: center;
   background: #fff;
