@@ -3,7 +3,8 @@
     <SlotMachine
       :items="items"
       :getPlaces="getPlaces"
-      :placeItems="placeItems" />
+      :placeItems="placeItems"
+      :resetItems="resetItems" />
   </div>
 </template>
 
@@ -47,9 +48,18 @@ export default {
       return []
     }
   },
-  methods: mapActions([
-    'getPlaces'
-  ])
+  methods: {
+    ...mapActions([
+      'getPlaces'
+    ]),
+    resetItems() {
+      this.items = [
+        [...foodIcons],
+        [...activityIcons],
+        [...foodIcons]
+      ]
+    }
+  }
 }
 </script>
 

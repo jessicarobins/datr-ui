@@ -28,7 +28,8 @@ export default {
   props: {
     getPlaces: Function,
     items: Array,
-    placeItems: Array
+    placeItems: Array,
+    resetItems: Function
   },
   data() {
     return {
@@ -69,6 +70,7 @@ export default {
     },
     toggle() {
       this.handleDown = true
+      this.resetItems()
       this.spin()
       this.getPlaces()
         .then(() => {
