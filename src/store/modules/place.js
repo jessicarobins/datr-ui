@@ -5,7 +5,9 @@ import { GET_PLACES } from '../types'
 const actions = {
   async getPlaces({ dispatch, commit, rootState }) {
     try {
-      await dispatch('getLocation', null, { root: true })
+      if (!rootState.location.coords) {
+        await dispatch('getLocation', null, { root: true })
+      }
       const place = await api('/places', {
         params: rootState.location.coords
       })

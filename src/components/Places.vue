@@ -4,12 +4,15 @@
       :items="items"
       :getPlaces="getPlaces"
       :placeItems="placeItems"
-      :resetItems="resetItems" />
+      :resetItems="resetItems">
+      <AppHeader />
+    </SlotMachine>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import AppHeader from './AppHeader.vue'
 import Place from './Place.vue'
 import SlotMachine from './SlotMachine/SlotMachine.vue'
 import { foodIcons, activityIcons } from './SlotMachine/icons'
@@ -17,6 +20,7 @@ import { foodIcons, activityIcons } from './SlotMachine/icons'
 export default {
   name: 'Places',
   components: {
+    AppHeader,
     Place,
     SlotMachine
   },
