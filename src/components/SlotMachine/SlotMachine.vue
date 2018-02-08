@@ -8,7 +8,8 @@
             v-for="n in numWheels"
             v-bind:key="n"
             :items="items[n - 1]"
-            :index="indices[n - 1]" />
+            :index="indices[n - 1]"
+            :spinning="spinning" />
         </div>
       </div>
       <div class="ring"></div>
@@ -33,8 +34,8 @@ export default {
   },
   data() {
     return {
-      handleDown: false,
-      indices: []
+      indices: [],
+      spinning: false
     }
   },
   created() {
@@ -46,7 +47,7 @@ export default {
     handleClass() {
       return {
         handle: true,
-        down: this.handleDown
+        down: this.spinning
       }
     },
     numWheels() {
@@ -69,12 +70,12 @@ export default {
       this.indices = this.newIndices
     },
     toggle() {
-      this.handleDown = true
+      this.spinning = true
       this.resetItems()
       this.spin()
       this.getPlaces()
         .then(() => {
-          this.handleDown = false
+          this.spinning = false
           const newIndices = []
           for (let i = 0; i < this.numWheels; i += 1) {
             this.items[i].splice(1, 0, this.placeItems[i])

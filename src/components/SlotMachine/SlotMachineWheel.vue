@@ -26,6 +26,7 @@ export default {
   props: {
     index: Number,
     items: Array,
+    spinning: Boolean,
     styles: Object
   },
   created() {
@@ -33,7 +34,8 @@ export default {
   },
   data() {
     return {
-      animatedIndex: 0
+      animatedIndex: 0,
+      infiniteTween: null
     }
   },
   computed: {
@@ -49,15 +51,27 @@ export default {
       return this.items[this.animatedIndex]
     }
   },
-  watch: {
-    index(newValue, oldValue) {
+  methods: {
+    runInfiniteTween(newValue, oldValue) {
       function animate() {
         if (TWEEN.update()) {
           requestAnimationFrame(animate)
         }
       }
-
       const value = { tweeningNumber: oldValue }
+      this.infiniteTween = new TWEEN.Tween(value)
+        .to({ tweeningNumber: newValue }, 2000)
+        .repeat(Infinity)
+        .onUpdate(() => {
+          this.animatedIndex = (value.tweeningNumber.toFixed(0) % this.items.length)
+        })
+        .start()
+
+      animate()
+    },
+    runFinalTween(newValue, oldValue) {
+      const value = { tweeningNumber: oldValue }
+
       new TWEEN.Tween(value)
         .easing(TWEEN.Easing.Quadratic.Out)
         .to({ tweeningNumber: newValue }, 2000)
@@ -65,8 +79,25 @@ export default {
           this.animatedIndex = (value.tweeningNumber.toFixed(0) % this.items.length)
         })
         .start()
-
-      animate()
+    },
+    stopInfiniteTween() {
+      if (this.infiniteTween) {
+        this.infiniteTween.stop()
+      }
+    }
+  },
+  watch: {
+    index(newValue, oldValue) {
+      if (this.spinning) {
+        this.runInfiniteTween(newValue, oldValue)
+      } else {
+        this.runFinalTween(newValue, oldValue)
+      }
+    },
+    spinning(newValue) {
+      if (!newValue) {
+        this.stopInfiniteTween()
+      }
     }
   }
 }
