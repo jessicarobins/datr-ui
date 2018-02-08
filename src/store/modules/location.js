@@ -1,5 +1,5 @@
 import getLocation from '@/services/Geo'
-import { GET_LOCATION } from '../types'
+import { GET_LOCATION, SET_ZIPCODE } from '../types'
 
 // actions
 const actions = {
@@ -16,15 +16,17 @@ const actions = {
 // mutations
 const mutations = {
   [GET_LOCATION](state, { latitude, longitude }) {
-    state.latitude = latitude
-    state.longitude = longitude
+    state.coords = { latitude, longitude }
+  },
+  [SET_ZIPCODE](state, zipcode) {
+    state.zipcode = zipcode
   }
 }
 
 // initial state
 const state = {
-  latitude: undefined,
-  longitude: undefined
+  coords: {},
+  zipcode: null
 }
 
 export default {
