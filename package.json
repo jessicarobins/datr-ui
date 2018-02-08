@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
@@ -23,6 +24,7 @@
     "@vue/cli-service": "^3.0.0-alpha.6",
     "@vue/eslint-config-airbnb": "^3.0.0-alpha.6",
     "node-sass": "^4.7.2",
+    "s3": "^4.4.0",
     "sass-loader": "^6.0.6",
     "vue-template-compiler": "^2.5.13"
   },
