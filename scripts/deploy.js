@@ -8,7 +8,7 @@ const client = s3.createClient({
 })
 
 const params = {
-  localDir: 'client/build',
+  localDir: 'dist',
   deleteRemoved: true,
 
   s3Params: {
