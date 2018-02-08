@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="slot-machine-outer-container">
-      <h1>datemachine</h1>
+      <h1 class="display-3">date-o-matic</h1>
       <div class="slot-machine-inner-container">
         <div class="slot-machine">
           <SlotMachineWheel

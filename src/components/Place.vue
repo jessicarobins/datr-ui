@@ -22,7 +22,6 @@ h1, h2 {
   font-weight: normal;
 }
 a {
-  color: #42b983;
   text-decoration: none
 }
 </style>
