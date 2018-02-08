@@ -4,7 +4,7 @@
       <div>
         <SlotMachineWheelItem :item="prevItem" />
       </div>
-      <div>
+      <div class="selected">
         <SlotMachineWheelItem :item="item" />
       </div>
       <div>
@@ -81,7 +81,7 @@ export default {
   display: inline-flex;
   flex-direction: column;
   height: 100%;
-  padding: 10px 40px;
+  padding: 10px;
   justify-content: space-between;
 }
 
@@ -100,6 +100,11 @@ export default {
 
 .wheel-container:last-child {
   border-right-width: 0;
+}
+
+.selected {
+  position: relative;
+  z-index: 2;
 }
 
 </style>

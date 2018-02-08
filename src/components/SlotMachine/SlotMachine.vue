@@ -73,14 +73,11 @@ export default {
       this.getPlaces()
         .then(() => {
           this.handleDown = false
-          this.items[0].splice(this.indices[0], 0, this.placeItems[0])
-          this.items[1].splice(this.indices[1], 0, this.placeItems[1])
-          this.items[2].splice(this.indices[2], 0, this.placeItems[2])
-          const newIndices = [
-            this.indices[0] + 1,
-            this.indices[1] + 1,
-            this.indices[2] + 1
-          ]
+          const newIndices = []
+          for (let i = 0; i < this.numWheels; i += 1) {
+            this.items[i].splice(1, 0, this.placeItems[i])
+            newIndices.push(1)
+          }
 
           this.indices = newIndices
         })
@@ -117,6 +114,7 @@ $bg-color: rgba(64, 64, 64, 1);
   display: flex;
   height: $height;
   min-width: 350px;
+  overflow:  hidden;
   position: relative;
   width: calc(#{$height} * 8 / 5);
 }
@@ -141,7 +139,7 @@ $bg-color: rgba(64, 64, 64, 1);
   position: absolute;
   content: '';
   display: block;
-  height: calc(#{$height} / 3);
+  height: calc(#{$height} * 2 / 5);
   top: 50%;
   transform: translateY(-50%);
   right: 0;
@@ -162,9 +160,17 @@ $bg-color: rgba(64, 64, 64, 1);
   content: "";
   position: absolute;
   bottom: 0;
-  width: 20px;
-  height: 60px;
-  background: linear-gradient(to right, #bbb 0%, #eee 30%, #bbb 100%);
+  width: 25px;
+  height: 175px;
+  background: linear-gradient(
+    to right,
+    #282828 0%,
+    #959595 1%,
+    #d1d1d1 30%,
+    #bababa 60%,
+    #959595 99%,
+    #212121 100%
+  );
   border-radius: 0 0 10px 0;
   transform-origin: bottom center;
   transition: transform 0.2s ease;
@@ -173,12 +179,16 @@ $bg-color: rgba(64, 64, 64, 1);
 .handle:after {
   content: "";
   position: absolute;
-  bottom: 55px;
-  left: -5px;
-  width: 30px;
-  height: 30px;
+  bottom: 170px;
+  left: -11px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: radial-gradient(circle farthest-corner at 25% 25%, LightSalmon 0%, tomato 100%);
+  background: radial-gradient(
+    circle farthest-corner at 25% 25%,
+    #90CAF9 0%,
+    #0D47A1 100%
+  );
   transform-origin: bottom center;
   transition: transform 0.2s ease;
 }
@@ -188,7 +198,7 @@ $bg-color: rgba(64, 64, 64, 1);
 }
 
 .handle.down:after {
-  transform: translateY(140px)
+  transform: translateY(350px)
 }
 
 .ring {

@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div v-if="hasData">
-      <Place type="food" :place="place('food')" />
-      <Place type="activity" :place="place('activity')"/>
-      <Place type="night" :place="place('night')" />
-    </div>
     <SlotMachine
       :items="items"
       :getPlaces="getPlaces"
@@ -26,7 +21,11 @@ export default {
   },
   data() {
     return {
-      items: [foodIcons, activityIcons, foodIcons]
+      items: [
+        [...foodIcons],
+        [...activityIcons],
+        [...foodIcons]
+      ]
     }
   },
   computed: {
