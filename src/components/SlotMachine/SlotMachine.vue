@@ -41,6 +41,7 @@ export default {
   },
   data() {
     return {
+      handleHalfDown: false,
       indices: [],
       message: 'insert zip code to play',
       spinning: false
@@ -58,7 +59,8 @@ export default {
     handleClass() {
       return {
         handle: true,
-        down: this.spinning
+        down: this.spinning,
+        'half-down': this.handleHalfDown
       }
     },
     numWheels() {
@@ -85,6 +87,10 @@ export default {
         this.makePlaceRequest()
       } else {
         this.message = 'out of credits. insert zip code to play.'
+        this.handleHalfDown = true
+        setInterval(() => {
+          this.handleHalfDown = false
+        }, 1500)
       }
     },
     makePlaceRequest() {
@@ -198,7 +204,7 @@ $bg-color: rgba(64, 64, 64, 1);
   );
   border-radius: 0 0 10px 0;
   transform-origin: bottom center;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .handle:after {
@@ -224,6 +230,16 @@ $bg-color: rgba(64, 64, 64, 1);
 
 .handle.down:after {
   transform: translateY(350px)
+}
+
+.handle.half-down:before {
+  transform: rotateX(45deg);
+}
+
+.handle.half-down:after {
+  width: 55px;
+  height: 55px;
+  transform: translateY(70px)
 }
 
 .ring {
