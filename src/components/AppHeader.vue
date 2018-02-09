@@ -81,8 +81,8 @@ export default {
 
 .spinner {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: calc(50% - 16px);
+  left: calc(50% - 16px);
   z-index: 2;
 }
 </style>
