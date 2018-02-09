@@ -3,33 +3,50 @@
     <h1 class="display-3">date-o-matic</h1>
     <div class="zip-code-container">
       <span class="subheading">INSERT ZIP CODE</span>
-      <v-text-field
-        :value="zipcode"
-        @input="updateZipcode"
-        append-icon="location_on"
-        :append-icon-cb="getZipcode"
-        solo></v-text-field>
+      <div class="input-container">
+        <v-text-field
+          :value="zipcode"
+          @input="updateZipcode"
+          append-icon="location_on"
+          :append-icon-cb="getZipcode"
+          :disabled="loadingLocation"
+          color="primary"
+          solo></v-text-field>
+        <v-progress-circular
+          v-if="loadingLocation"
+          class="spinner"
+          indeterminate
+          color="primary"></v-progress-circular>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import { SET_ZIPCODE } from '@/store/types'
+import { mapState } from 'vuex'
+import { RESET_LOCATION, SET_ZIPCODE } from '@/store/types'
 
 export default {
   name: 'AppHeader',
+  data() {
+    return {
+      loadingLocation: false
+    }
+  },
   computed: {
     ...mapState({
       zipcode: state => state.location.zipcode
     })
   },
   methods: {
-    ...mapActions([
-      'getZipcode'
-    ]),
+    async getZipcode() {
+      this.loadingLocation = true
+      await this.$store.dispatch('getZipcode')
+      this.loadingLocation = false
+    },
     updateZipcode(value) {
       this.$store.commit(SET_ZIPCODE, value)
+      this.$store.commit(RESET_LOCATION)
     }
   }
 }
@@ -56,5 +73,16 @@ export default {
   border-radius: 10px;
   padding: 10px 20px;
   width: 175px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
 }
 </style>

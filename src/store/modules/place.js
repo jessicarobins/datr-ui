@@ -4,9 +4,18 @@ import { GET_PLACES } from '../types'
 // actions
 const actions = {
   async getPlaces({ commit, rootState }) {
+    const { coords, zipcode } = rootState.location
+    let params
+
+    if (coords.latitude && coords.longitude) {
+      params = coords
+    } else {
+      params = { zipcode }
+    }
+
     try {
       const place = await api('/places', {
-        params: rootState.location.coords || { zipcode: rootState.location.zipcode }
+        params
       })
       commit(GET_PLACES, place)
     } catch (err) {

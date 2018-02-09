@@ -98,8 +98,10 @@ $bg-color: rgba(64, 64, 64, 1);
   background: #448AFF;
   display: inline-block;
   border-radius: 20px;
+  min-width: 700px;
   padding: 50px 40px 20px;
   position: relative;
+  width: calc(#{$height} * 5 / 2);
 }
 
 .slot-machine-inner-container {
@@ -119,7 +121,6 @@ $bg-color: rgba(64, 64, 64, 1);
   min-width: 350px;
   overflow:  hidden;
   position: relative;
-  width: calc(#{$height} * 8 / 5);
 }
 
 .slot-machine:before {

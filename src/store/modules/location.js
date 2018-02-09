@@ -1,13 +1,13 @@
 import getLocation from '@/services/Geo'
 import api from '@/services/Api'
-import { GET_LOCATION, SET_ZIPCODE } from '../types'
+import * as types from '../types'
 
 // actions
 const actions = {
   async getLocation({ commit }) {
     try {
       const location = await getLocation()
-      commit(GET_LOCATION, location)
+      commit(types.GET_LOCATION, location)
     } catch (err) {
       console.log(err)
     }
@@ -18,7 +18,7 @@ const actions = {
       const { zipcode } = await api('/geo/zipcode', {
         params: { ...state.coords }
       })
-      commit(SET_ZIPCODE, zipcode)
+      commit(types.SET_ZIPCODE, zipcode)
     } catch (err) {
       console.log(err)
     }
@@ -27,10 +27,13 @@ const actions = {
 
 // mutations
 const mutations = {
-  [GET_LOCATION](state, { latitude, longitude }) {
+  [types.GET_LOCATION](state, { latitude, longitude }) {
     state.coords = { latitude, longitude }
   },
-  [SET_ZIPCODE](state, zipcode) {
+  [types.RESET_LOCATION](state) {
+    state.coords = {}
+  },
+  [types.SET_ZIPCODE](state, zipcode) {
     state.zipcode = zipcode
   }
 }
