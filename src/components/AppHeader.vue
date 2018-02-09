@@ -2,18 +2,19 @@
   <div class="app-header">
     <h1 class="display-3">date-o-matic</h1>
     <div class="zip-code-container">
-      <span class="subheading">INSERT ZIP CODE INTO SLOT</span>
+      <span class="subheading">INSERT ZIP CODE</span>
       <v-text-field
         :value="zipcode"
         @input="updateZipcode"
-        append-icon="location_searching"
+        append-icon="location_on"
+        :append-icon-cb="getZipcode"
         solo></v-text-field>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { SET_ZIPCODE } from '@/store/types'
 
 export default {
@@ -24,6 +25,9 @@ export default {
     })
   },
   methods: {
+    ...mapActions([
+      'getZipcode'
+    ]),
     updateZipcode(value) {
       this.$store.commit(SET_ZIPCODE, value)
     }

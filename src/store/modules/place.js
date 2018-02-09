@@ -3,13 +3,10 @@ import { GET_PLACES } from '../types'
 
 // actions
 const actions = {
-  async getPlaces({ dispatch, commit, rootState }) {
+  async getPlaces({ commit, rootState }) {
     try {
-      if (!rootState.location.coords) {
-        await dispatch('getLocation', null, { root: true })
-      }
       const place = await api('/places', {
-        params: rootState.location.coords
+        params: rootState.location.coords || { zipcode: rootState.location.zipcode }
       })
       commit(GET_PLACES, place)
     } catch (err) {
