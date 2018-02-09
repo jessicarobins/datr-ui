@@ -21,7 +21,7 @@
     "@vue/cli-plugin-babel": "^3.0.0-alpha.6",
     "@vue/cli-plugin-eslint": "^3.0.0-alpha.6",
     "@vue/cli-plugin-pwa": "^3.0.0-alpha.6",
-    "@vue/cli-service": "^3.0.0-alpha.6",
+    "@vue/cli-service": "^3.0.0-alpha.10",
     "@vue/eslint-config-airbnb": "^3.0.0-alpha.6",
     "node-sass": "^4.7.2",
     "s3": "^4.4.0",

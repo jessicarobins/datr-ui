@@ -8,7 +8,7 @@ export default async function callApi(url, { method = 'get', data, params } = {}
 
   try {
     const response = await axios({
-      baseURL: process.env.VUE_APP_API_URL,
+      baseURL: `${process.env.VUE_APP_API_URL || ''}/api`,
       headers,
       method,
       url,
