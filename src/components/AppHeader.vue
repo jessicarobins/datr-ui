@@ -21,14 +21,13 @@ export default {
 .display-3 {
   flex: 1;
   align-self: center;
-  font-family: 'Bungee Shade', cursive;
-  background: #BBDEFB;
+  font-family: 'Fascinate Inline', cursive;
   height: 100%;
   padding: 20px;
   border-top-right-radius: 25%;
   border-top-left-radius: 25%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  margin: 10px;
+  text-transform: uppercase;
 }
 </style>
