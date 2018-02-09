@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "rm -rf dist && VUE_APP_API_URL=https://dateomatic.herokuapp.com/ yarn build && node scripts/deploy.js"
+    "deploy": "rm -rf dist && VUE_APP_API_URL=https://dateomatic.herokuapp.com yarn build && node scripts/deploy.js"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
