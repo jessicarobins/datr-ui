@@ -4,14 +4,15 @@
       :items="items"
       :getPlaces="getPlaces"
       :placeItems="placeItems"
-      :resetItems="resetItems">
+      :resetItems="resetItems"
+      :canSpin="hasValidLocation">
       <AppHeader />
     </SlotMachine>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import AppHeader from './AppHeader.vue'
 import Place from './Place.vue'
 import SlotMachine from './SlotMachine/SlotMachine.vue'
@@ -50,7 +51,10 @@ export default {
       }
 
       return []
-    }
+    },
+    ...mapGetters([
+      'hasValidLocation'
+    ])
   },
   methods: {
     ...mapActions([

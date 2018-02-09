@@ -2,6 +2,7 @@
   <div>
     <div class="slot-machine-outer-container">
       <slot></slot>
+      <SlotMachineMessage :message="message" />
       <div class="slot-machine-inner-container">
         <div class="slot-machine">
           <SlotMachineWheel
@@ -13,20 +14,26 @@
         </div>
       </div>
       <div class="ring"></div>
-      <button v-bind:class="handleClass" @click="toggle"></button>
+      <button
+        :disabled="disableButton"
+        :class="handleClass"
+        @click="toggle"></button>
     </div>
   </div>
 </template>
 
 <script>
 import SlotMachineWheel from './SlotMachineWheel.vue'
+import SlotMachineMessage from './SlotMachineMessage.vue'
 
 export default {
   name: 'SlotMachine',
   components: {
+    SlotMachineMessage,
     SlotMachineWheel
   },
   props: {
+    canSpin: Boolean,
     getPlaces: Function,
     items: Array,
     placeItems: Array,
@@ -35,6 +42,7 @@ export default {
   data() {
     return {
       indices: [],
+      message: 'insert zip code to play',
       spinning: false
     }
   },
@@ -44,6 +52,9 @@ export default {
     }
   },
   computed: {
+    disableButton() {
+      return this.spinning
+    },
     handleClass() {
       return {
         handle: true,
@@ -70,7 +81,15 @@ export default {
       this.indices = this.newIndices
     },
     toggle() {
+      if (this.canSpin) {
+        this.makePlaceRequest()
+      } else {
+        this.message = 'out of credits. insert zip code to play.'
+      }
+    },
+    makePlaceRequest() {
       this.spinning = true
+      this.message = '...'
       this.resetItems()
       this.spin()
       this.getPlaces()
@@ -83,6 +102,7 @@ export default {
           }
 
           this.indices = newIndices
+          this.message = 'jackpot!'
         })
     }
   }
@@ -98,6 +118,7 @@ $bg-color: rgba(64, 64, 64, 1);
   background: #448AFF;
   display: inline-block;
   border-radius: 20px;
+  max-width: 1000px;
   min-width: 700px;
   padding: 50px 40px 20px;
   position: relative;

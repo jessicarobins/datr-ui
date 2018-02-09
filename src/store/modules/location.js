@@ -25,6 +25,11 @@ const actions = {
   }
 }
 
+// getters
+const getters = {
+  hasValidLocation: state => !!((state.coords.latitude && state.coords.longitude) || state.zipcode)
+}
+
 // mutations
 const mutations = {
   [types.GET_LOCATION](state, { latitude, longitude }) {
@@ -47,5 +52,6 @@ const state = {
 export default {
   state,
   actions,
+  getters,
   mutations
 }
