@@ -1,7 +1,7 @@
 <template>
   <div class="zipcode-container">
     <div class="zipcode">
-      <span class="subheading">INSERT ZIP CODE</span>
+      <span class="subheading">1 ZIP CODE</span>
       <div class="input-container">
         <v-text-field
           :value="zipcode"
@@ -52,13 +52,19 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import '../styles/variables';
+
 .zipcode {
-  background-color: #1565C0;
-  border: 3px inset #1976D2;
+  background: linear-gradient(90deg, #fff 0, #BDBDBD 115%);
+  border: $silver-border;
   border-radius: 10px;
   padding: 10px 20px;
   width: 180px;
+  border-top: 0;
+  margin-top: -2px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .input-container {
@@ -66,7 +72,7 @@ export default {
 }
 
 .subheading {
-  color: #fff;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .spinner {
