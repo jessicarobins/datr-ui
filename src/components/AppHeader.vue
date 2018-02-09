@@ -1,90 +1,34 @@
 <template>
   <div class="app-header">
     <h1 class="display-3">date-o-matic</h1>
-    <div class="zip-code-container">
-      <span class="subheading">INSERT ZIP CODE</span>
-      <div class="input-container">
-        <v-text-field
-          :value="zipcode"
-          @input="updateZipcode"
-          append-icon="location_on"
-          :append-icon-cb="getZipcode"
-          :disabled="loadingLocation"
-          color="primary"
-          solo></v-text-field>
-        <v-progress-circular
-          v-if="loadingLocation"
-          class="spinner"
-          indeterminate
-          color="primary"></v-progress-circular>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { RESET_LOCATION, SET_ZIPCODE } from '@/store/types'
-
 export default {
-  name: 'AppHeader',
-  data() {
-    return {
-      loadingLocation: false
-    }
-  },
-  computed: {
-    ...mapState({
-      zipcode: state => state.location.zipcode
-    })
-  },
-  methods: {
-    async getZipcode() {
-      this.loadingLocation = true
-      await this.$store.dispatch('getZipcode')
-      this.loadingLocation = false
-    },
-    updateZipcode(value) {
-      this.$store.commit(SET_ZIPCODE, value)
-      this.$store.commit(RESET_LOCATION)
-    }
-  }
+  name: 'AppHeader'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .app-header {
-  display: flex;
-  flex-shrink: 0;
-  margin-bottom: 10px;
-}
-
-.subheading {
-  color: #fff;
+  border: 15px dotted #FFEA00;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
 }
 
 .display-3 {
   flex: 1;
   align-self: center;
-}
-
-.zip-code-container {
-  background-color: #1565C0;
-  border: 3px inset #1976D2;
-  border-radius: 10px;
-  padding: 10px 20px;
-  width: 180px;
-}
-
-.input-container {
-  position: relative;
-}
-
-.spinner {
-  position: absolute;
-  top: calc(50% - 16px);
-  left: calc(50% - 16px);
-  z-index: 2;
+  font-family: 'Bungee Shade', cursive;
+  background: #BBDEFB;
+  height: 100%;
+  padding: 20px;
+  border-top-right-radius: 25%;
+  border-top-left-radius: 25%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 10px;
 }
 </style>

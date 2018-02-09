@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="slot-machine-container">
+    <div class="slot-machine-top">
+      <slot name="header"></slot>
+    </div>
     <div class="slot-machine-outer-container">
-      <slot></slot>
       <SlotMachineMessage :message="message" />
       <div class="slot-machine-inner-container">
         <div class="slot-machine">
@@ -13,6 +15,7 @@
             :spinning="spinning" />
         </div>
       </div>
+      <slot name="footer"></slot>
       <div class="ring"></div>
       <button
         :disabled="disableButton"
@@ -119,20 +122,36 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$height: 90vh;
+$height: 95vh;
 $bg-color: rgba(64, 64, 64, 1);
+
+.slot-machine-container {
+  width: 80vw;
+  height: $height;
+  display: flex;
+  flex-direction: column;
+}
+
+.slot-machine-top {
+  background: #448AFF;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
+  flex-shrink: 0;
+  padding: 20px 40px 0;
+}
 
 .slot-machine-outer-container {
   background: #448AFF;
   display: inline-flex;
+  flex: 1;
   flex-direction: column;
-  border-radius: 20px;
-  height: $height;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   max-width: 1000px;
   min-width: 700px;
-  padding: 50px 40px 20px;
+  padding: 10px 40px 20px;
   position: relative;
-  width: calc(#{$height} * 5 / 2);
+  width: 100%;
 }
 
 .slot-machine-inner-container {
@@ -176,7 +195,7 @@ $bg-color: rgba(64, 64, 64, 1);
   position: absolute;
   content: '';
   display: block;
-  height: 50%;
+  height: 45%;
   top: 50%;
   transform: translateY(-50%);
   right: 0;

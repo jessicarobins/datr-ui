@@ -6,7 +6,8 @@
       :placeItems="placeItems"
       :resetItems="resetItems"
       :canSpin="hasValidLocation">
-      <AppHeader />
+      <AppHeader slot="header" />
+      <Zipcode slot="footer" />
     </SlotMachine>
   </div>
 </template>
@@ -16,6 +17,7 @@ import { mapActions, mapGetters } from 'vuex'
 import AppHeader from './AppHeader.vue'
 import Place from './Place.vue'
 import SlotMachine from './SlotMachine/SlotMachine.vue'
+import Zipcode from './Zipcode.vue'
 import { foodIcons, activityIcons } from './SlotMachine/icons'
 
 export default {
@@ -23,7 +25,8 @@ export default {
   components: {
     AppHeader,
     Place,
-    SlotMachine
+    SlotMachine,
+    Zipcode
   },
   data() {
     return {
