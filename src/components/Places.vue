@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <SlotMachine
-      :items="items"
-      :getPlaces="getPlaces"
-      :placeItems="placeItems"
-      :resetItems="resetItems"
-      :canSpin="hasValidLocation">
-      <AppHeader slot="header" />
-      <Zipcode slot="footer" />
-    </SlotMachine>
-  </div>
+  <SlotMachine
+    :items="items"
+    :getPlaces="getPlaces"
+    :placeItems="placeItems"
+    :resetItems="resetItems"
+    :canSpin="hasValidLocation">
+    <AppHeader slot="header" />
+    <Zipcode slot="footer" />
+  </SlotMachine>
 </template>
 
 <script>

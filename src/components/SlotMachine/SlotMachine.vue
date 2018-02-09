@@ -1,9 +1,11 @@
 <template>
   <div class="slot-machine-container">
     <div class="slot-machine-top">
-      <slot name="header"></slot>
+      <div class="header-container">
+        <slot name="header"></slot>
+      </div>
     </div>
-    <div class="slot-machine-outer-container">
+    <div class="slot-machine-gradient-container">
       <SlotMachineMessage :message="message" />
       <div class="slot-machine-inner-container">
         <div class="slot-machine">
@@ -14,13 +16,16 @@
             :index="indices[n - 1]"
             :spinning="spinning" />
         </div>
+        <div class="bars"></div>
       </div>
-      <slot name="footer"></slot>
       <div class="ring"></div>
       <button
         :disabled="disableButton"
         :class="handleClass"
         @click="toggle"></button>
+    </div>
+    <div class="footer-container">
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>
@@ -122,44 +127,85 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$height: 95vh;
+$height: 100vh;
 $bg-color: rgba(64, 64, 64, 1);
 
 .slot-machine-container {
   width: 80vw;
   height: $height;
+  min-height: 790px;
   display: flex;
   flex-direction: column;
+  max-width: 1000px;
+  min-width: 700px;
+  position: relative;
 }
 
 .slot-machine-top {
-  background: #448AFF;
-  border-top-left-radius: 25%;
-  border-top-right-radius: 25%;
   flex-shrink: 0;
-  padding: 20px 40px 0;
+  border-top-left-radius: 90px;
+  border-top-right-radius: 90px;
+  border: 2px outset #BDBDBD;
+  border-bottom: 0;
+  padding: 20px 20px 0;
+  background: linear-gradient(90deg, #BDBDBD 0%, #fff 80%, #BDBDBD 100%);
+
+  .header-container {
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 3px inset #BDBDBD;
+    background: linear-gradient(90deg, #2962FF 0%, #82B1FF 80%, #2962FF 100%);
+    padding: 10px;
+  }
 }
 
-.slot-machine-outer-container {
-  background: #448AFF;
+.slot-machine-gradient-container {
+  background: linear-gradient(90deg,
+    #BDBDBD 0%,
+    #fff 80%,
+    #BDBDBD 100%
+  );
+  border: 2px outset #BDBDBD;
+  border-top: 0;
   display: inline-flex;
   flex: 1;
   flex-direction: column;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  max-width: 1000px;
-  min-width: 700px;
-  padding: 10px 40px 20px;
-  position: relative;
+  padding: 20px;
   width: 100%;
+}
+
+.bars {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  bottom: -30px;
+  right: -30px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(33.3333% + 3px),
+      #BDBDBD calc(33.3333% + 3px),
+      #fff calc(33.3333% + 16px),
+      #BDBDBD calc(33.3333% + 18px),
+      transparent calc(33.3333% + 18px),
+      transparent calc(66.6666% - 18px),
+      #BDBDBD calc(66.6666% - 18px),
+      #fff calc(66.6666% - 6px),
+      #BDBDBD calc(66.6666% - 3px),
+      transparent calc(66.6666% - 3px),
+      transparent 100%
+    );
 }
 
 .slot-machine-inner-container {
   background-color: #404040;
-  border: 30px inset #1976D2;
+  border: 30px inset #BDBDBD;
   border-radius: 20px;
   flex: 1;
-  overflow: hidden;
+  position: relative;
 }
 
 .slot-machine {
@@ -286,6 +332,15 @@ $bg-color: rgba(64, 64, 64, 1);
   top: 0;
   transform: translateY(50%);
   width: 20px;
+}
+
+.footer-container {
+  background: linear-gradient(90deg, #1565C0 0%, #1E88E5 80%, #1565C0 100%);
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 </style>

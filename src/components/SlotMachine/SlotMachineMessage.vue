@@ -19,7 +19,7 @@ export default {
   background-color: #424242;
   border: 3px inset #616161;
   border-radius: 10px;
-  color: #E3F2FD;
+  color: #FFF9C4;
   font-family: 'Orbitron', sans-serif;
   font-size: 25px;
   height: 50px;

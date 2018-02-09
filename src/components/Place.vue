@@ -18,8 +18,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1 {
   font-weight: normal;
+  line-height: 1;
 }
 a {
   text-decoration: none
