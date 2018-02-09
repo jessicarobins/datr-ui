@@ -88,7 +88,7 @@ export default {
       } else {
         this.message = 'out of credits. insert zip code to play.'
         this.handleHalfDown = true
-        setInterval(() => {
+        setTimeout(() => {
           this.handleHalfDown = false
         }, 1500)
       }
@@ -108,7 +108,9 @@ export default {
           }
 
           this.indices = newIndices
-          this.message = 'jackpot!'
+          setTimeout(() => {
+            this.message = 'jackpot!'
+          }, 2000)
         })
     }
   }
@@ -117,13 +119,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$height: 70vh;
+$height: 90vh;
 $bg-color: rgba(64, 64, 64, 1);
 
 .slot-machine-outer-container {
   background: #448AFF;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   border-radius: 20px;
+  height: $height;
   max-width: 1000px;
   min-width: 700px;
   padding: 50px 40px 20px;
@@ -132,9 +136,11 @@ $bg-color: rgba(64, 64, 64, 1);
 }
 
 .slot-machine-inner-container {
-  background-color: #1565C0;
+  background-color: #404040;
+  border: 30px inset #1976D2;
   border-radius: 20px;
-  padding: 40px 25px 10px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .slot-machine {
@@ -144,7 +150,7 @@ $bg-color: rgba(64, 64, 64, 1);
   border-bottom: 0;
   border-radius: 10px;
   display: flex;
-  height: $height;
+  height: 100%;
   min-width: 350px;
   overflow:  hidden;
   position: relative;
@@ -170,7 +176,7 @@ $bg-color: rgba(64, 64, 64, 1);
   position: absolute;
   content: '';
   display: block;
-  height: calc(#{$height} * 2 / 5);
+  height: 50%;
   top: 50%;
   transform: translateY(-50%);
   right: 0;

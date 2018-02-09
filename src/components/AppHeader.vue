@@ -56,6 +56,7 @@ export default {
 <style scoped>
 .app-header {
   display: flex;
+  flex-shrink: 0;
   margin-bottom: 10px;
 }
 
@@ -70,9 +71,10 @@ export default {
 
 .zip-code-container {
   background-color: #1565C0;
+  border: 3px inset #1976D2;
   border-radius: 10px;
   padding: 10px 20px;
-  width: 175px;
+  width: 180px;
 }
 
 .input-container {
