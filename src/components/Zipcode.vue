@@ -56,15 +56,12 @@ export default {
 @import '../styles/variables';
 
 .zipcode {
-  background: linear-gradient(90deg, #fff 0, #BDBDBD 115%);
+  background: $silver-background;
   border: $silver-border;
   border-radius: 10px;
   padding: 10px 20px;
   width: 180px;
-  border-top: 0;
-  margin-top: -2px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  margin-top: 5px;
 }
 
 .input-container {

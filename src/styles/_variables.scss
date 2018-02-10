@@ -1,2 +1,50 @@
-$silver-background: linear-gradient(90deg, #BDBDBD 0%, #fff 80%, #BDBDBD 100%);
-$silver-border: 3px inset #BDBDBD;
+/* breakpoints */
+$tablet-breakpoint: 768px;
+
+/* colors */
+$gray-lighten-1: #BDBDBD;
+$gray-lighten-5: #FAFAFA;
+$gray-darken-1: #757575;
+$gray-darken-2: #616161;
+$gray-darken-3: #424242;
+$gray-darken-4: #212121;
+
+$blue: #2196F3;
+$blue-lighten-3: #90CAF9;
+$blue-darken-1: #1E88E5;
+$blue-darken-3: #1565C0;
+$blue-darken-4: #0D47A1;
+
+$yellow-lighten-4: #FFF9C4;
+$yellow-accent-1: #FFFF8D;
+$yellow-accent-4: #FFD600;
+
+/* theme colors */
+$primary: $blue;
+$primary-lighten-3: $blue-lighten-3;
+$primary-darken-1: $blue-darken-1;
+$primary-darken-3: $blue-darken-3;
+
+$accent-lighten-4: $yellow-lighten-4;
+$accent-1: $yellow-accent-1;
+$accent-4: $yellow-accent-4;
+
+/* spacing */
+$silver-width: 20px;
+$silver-width-mobile: 10px;
+
+/* skeuomorphism */
+$silver-background: linear-gradient(
+  90deg,
+  $gray-lighten-1 0%,
+  $gray-lighten-5 80%,
+  $gray-lighten-1 100%
+);
+$inset-border: 3px inset;
+$silver-border: $inset-border $gray-lighten-1;
+$dark-border: $inset-border $gray-darken-2;
+
+$silver-border-outset: 2px outset $gray-lighten-1;
+
+$wheel-margin: 16px;
+$wheel-margin-mobile: 10px;

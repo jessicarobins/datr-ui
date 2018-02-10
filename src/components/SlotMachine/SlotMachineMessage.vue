@@ -14,19 +14,26 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import '../../styles/variables';
+
 .slot-machine-message {
-  background-color: #424242;
-  border: 3px inset #616161;
+  background-color: $gray-darken-3;
+  border: $dark-border;
   border-radius: 10px;
-  color: #FFF9C4;
+  color: $accent-lighten-4;
   font-family: 'Orbitron', sans-serif;
-  font-size: 25px;
-  height: 50px;
-  line-height: 50px;
+  font-size: 24px;
   margin-bottom: 10px;
+  padding: 3px;
   text-align: center;
-  text-shadow: 1px 1px 2px black;;
+  text-shadow: 1px 1px 2px black;
   text-transform: uppercase;
+
+  @media (max-width: $tablet-breakpoint) {
+    font-size: 3vw;
+  }
 }
+
+
 </style>

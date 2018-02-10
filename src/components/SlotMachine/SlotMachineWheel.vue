@@ -104,33 +104,31 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import '../../styles/variables';
+
 .wheel {
   align-items: center;
   background: #fff;
-  width: 90%;
   display: inline-flex;
   flex-direction: column;
   height: 100%;
-  padding: 10px;
+  margin: 0 $wheel-margin;
   justify-content: space-between;
+
+  @media (max-width: $tablet-breakpoint) {
+    margin: 0 $wheel-margin-mobile;
+  }
 }
 
 .wheel-container {
-  border-color: #BDBDBD;
-  border-style: solid;
-  border-right-width: 4px;
-  border-left-width: 4px;
   flex: 1;
   height: 100%;
-}
-
-.wheel-container:first-child {
-  border-left-width: 0;
-}
-
-.wheel-container:last-child {
-  border-right-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .selected {

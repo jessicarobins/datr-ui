@@ -23,8 +23,16 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import '../../styles/variables';
+
 i {
-  font-size: 10vh;
+  font-size: 10vw;
+}
+
+@media (min-width: $tablet-breakpoint) {
+  i {
+     font-size: 64px;
+  }
 }
 </style>

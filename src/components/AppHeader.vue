@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <h1 class="display-3">date-o-matic</h1>
+    <h1>date-o-matic</h1>
   </div>
 </template>
 
@@ -11,9 +11,13 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import '../styles/variables';
+
+$light-size: 10px;
+
 .app-header {
-  border: 15px dotted #F9A825;
+  border: $light-size dotted $accent-1;
   border-top-left-radius: 90px;
   border-top-right-radius: 90px;
   position: relative;
@@ -22,23 +26,24 @@ export default {
 .app-header:after {
   content: '';
   position: absolute;
-  top: -17px;
-  bottom: -17px;
-  left: -17px;
-  right: -17px;
-  border: 15px dotted #FFEA00;
+  top: calc(-#{$light-size} - 2px);
+  bottom: calc(-#{$light-size} - 2px);
+  left: calc(-#{$light-size} - 2px);
+  right: calc(-#{$light-size} - 2px);
+  border: $light-size dotted $accent-4;
   border-top-left-radius: 90px;
   border-top-right-radius: 90px;
 }
 
-.display-3 {
+h1 {
   flex: 1;
+  font-size: 4vw;
   align-self: center;
   font-family: 'Fascinate Inline', cursive;
   height: 100%;
-  padding: 20px;
+  padding: 10px;
   text-transform: uppercase;
-  -webkit-text-stroke: 1px #FFEA00;
+  -webkit-text-stroke: 1px $accent-4;
   color: #0D47A1;
   text-shadow: 1px 1px 2px black;
 }

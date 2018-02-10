@@ -1,44 +1,40 @@
 <template>
   <div class="slot-machine-container">
-    <div class="slot-machine-top">
-      <div class="header-container">
-        <slot name="header"></slot>
-      </div>
-    </div>
+    <SlotMachineTop>
+      <slot name="header"></slot>
+    </SlotMachineTop>
     <div class="slot-machine-gradient-container">
       <SlotMachineMessage :message="message" />
-      <div class="slot-machine-inner-container">
-        <div class="slot-machine">
-          <SlotMachineWheel
-            v-for="n in numWheels"
-            v-bind:key="n"
-            :items="items[n - 1]"
-            :index="indices[n - 1]"
-            :spinning="spinning" />
-        </div>
-        <div class="bars"></div>
-      </div>
+      <SlotMachineWheelContainer
+        :num-wheels="numWheels"
+        :items="items"
+        :indices="indices"
+        :spinning="spinning" />
       <div class="ring"></div>
       <button
         :disabled="disableButton"
         :class="handleClass"
         @click="toggle"></button>
     </div>
-    <div class="footer-container">
+    <SlotMachineBottom>
       <slot name="footer"></slot>
-    </div>
+    </SlotMachineBottom>
   </div>
 </template>
 
 <script>
-import SlotMachineWheel from './SlotMachineWheel.vue'
 import SlotMachineMessage from './SlotMachineMessage.vue'
+import SlotMachineTop from './SlotMachineTop.vue'
+import SlotMachineBottom from './SlotMachineBottom.vue'
+import SlotMachineWheelContainer from './SlotMachineWheelContainer.vue'
 
 export default {
   name: 'SlotMachine',
   components: {
+    SlotMachineBottom,
     SlotMachineMessage,
-    SlotMachineWheel
+    SlotMachineTop,
+    SlotMachineWheelContainer
   },
   props: {
     canSpin: Boolean,
@@ -127,8 +123,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../../styles/variables';
+
 $height: 100vh;
-$bg-color: rgba(64, 64, 64, 1);
+$ring-width: 20px;
+$ring-width-mobile: 10px;
+$handle-width: 25px;
+$handle-width-mobile: 15px;
 
 .slot-machine-container {
   width: 80vw;
@@ -137,116 +138,22 @@ $bg-color: rgba(64, 64, 64, 1);
   display: flex;
   flex-direction: column;
   max-width: 1000px;
-  min-width: 700px;
   position: relative;
 }
 
-.slot-machine-top {
-  flex-shrink: 0;
-  border-top-left-radius: 90px;
-  border-top-right-radius: 90px;
-  border: 2px outset #BDBDBD;
-  border-bottom: 0;
-  padding: 20px 20px 0;
-  background: linear-gradient(90deg, #BDBDBD 0%, #fff 80%, #BDBDBD 100%);
-
-  .header-container {
-    border-top-left-radius: 90px;
-    border-top-right-radius: 90px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 3px inset #BDBDBD;
-    background: linear-gradient(90deg, #2962FF 0%, #82B1FF 80%, #2962FF 100%);
-    padding: 10px;
-  }
-}
-
 .slot-machine-gradient-container {
-  background: linear-gradient(90deg,
-    #BDBDBD 0%,
-    #fff 80%,
-    #BDBDBD 100%
-  );
-  border: 2px outset #BDBDBD;
+  background: $silver-background;
+  border: $silver-border-outset;
   border-top: 0;
   display: inline-flex;
   flex: 1;
   flex-direction: column;
-  padding: 20px;
+  padding: $silver-width;
   width: 100%;
-}
 
-.bars {
-  content: '';
-  position: absolute;
-  top: -30px;
-  left: -30px;
-  bottom: -30px;
-  right: -30px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent calc(33.3333% + 3px),
-      #BDBDBD calc(33.3333% + 3px),
-      #fff calc(33.3333% + 16px),
-      #BDBDBD calc(33.3333% + 18px),
-      transparent calc(33.3333% + 18px),
-      transparent calc(66.6666% - 18px),
-      #BDBDBD calc(66.6666% - 18px),
-      #fff calc(66.6666% - 6px),
-      #BDBDBD calc(66.6666% - 3px),
-      transparent calc(66.6666% - 3px),
-      transparent 100%
-    );
-}
-
-.slot-machine-inner-container {
-  background-color: #404040;
-  border: 30px inset #BDBDBD;
-  border-radius: 20px;
-  flex: 1;
-  position: relative;
-}
-
-.slot-machine {
-  background: $bg-color;
-  border: 5px solid #404040;
-  border-top: 0;
-  border-bottom: 0;
-  border-radius: 10px;
-  display: flex;
-  height: 100%;
-  min-width: 350px;
-  overflow:  hidden;
-  position: relative;
-}
-
-.slot-machine:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  background: linear-gradient(
-    to bottom,
-    #{$bg-color} 0%,
-    rgba(64,64,64,0) 15%,
-    rgba(64,64,64,0) 85%,
-    #{$bg-color} 100%
-  );
-}
-
-.slot-machine:after {
-  position: absolute;
-  content: '';
-  display: block;
-  height: 45%;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  left: 0;
-  background: rgba(41, 121, 255, .1);
+  @media (max-width: $tablet-breakpoint) {
+    padding: $silver-width-mobile;
+  }
 }
 
 .handle {
@@ -256,26 +163,33 @@ $bg-color: rgba(64, 64, 64, 1);
   bottom: 0;
   transform: translateY(-50%);
   transition: transform 0.2s ease;
+
+  @media (max-width: $tablet-breakpoint) {
+    right: -10px;
+  }
 }
 
 .handle:before {
   content: "";
   position: absolute;
   bottom: 0;
-  width: 25px;
+  width: $handle-width;
   height: 175px;
   background: linear-gradient(
     to right,
-    #282828 0%,
-    #959595 1%,
-    #d1d1d1 30%,
-    #bababa 60%,
-    #959595 99%,
-    #212121 100%
+    $gray-darken-4 0%,
+    $gray-darken-1 1%,
+    $gray-lighten-5 30%,
+    $gray-darken-1 99%,
+    $gray-darken-4 100%
   );
   border-radius: 0 0 10px 0;
   transform-origin: bottom center;
   transition: all 0.2s ease;
+
+  @media (max-width: $tablet-breakpoint) {
+    width: $handle-width-mobile;
+  }
 }
 
 .handle:after {
@@ -288,11 +202,16 @@ $bg-color: rgba(64, 64, 64, 1);
   border-radius: 50%;
   background: radial-gradient(
     circle farthest-corner at 25% 25%,
-    #90CAF9 0%,
-    #0D47A1 100%
+    $primary-lighten-3 0%,
+    $blue-darken-4 100%
   );
   transform-origin: bottom center;
   transition: transform 0.2s ease;
+
+  @media (max-width: $tablet-breakpoint) {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .handle.down:before {
@@ -310,37 +229,33 @@ $bg-color: rgba(64, 64, 64, 1);
 .handle.half-down:after {
   width: 55px;
   height: 55px;
-  transform: translateY(70px)
+  transform: translateY(70px);
+
+  @media (max-width: $tablet-breakpoint) {
+    width: 45px;
+    height: 45px;
+  }
 }
 
 .ring {
-  background: #282828;
   background: linear-gradient(
     to bottom,
-    #282828 0%,
-    #959595 14%,
-    #d1d1d1 37%,
-    #bababa 49%,
-    #959595 67%,
-    #212121 100%
+    $gray-darken-2 0%,
+    $gray-lighten-5 50%,
+    $gray-darken-2 100%
   );
   border-radius: 0 10px 10px 0;
   height: 50%;
-  right: -20px;
+  right: -$ring-width;
   overflow: hidden;
   position: absolute;
   top: 0;
   transform: translateY(50%);
-  width: 20px;
-}
+  width: $ring-width;
 
-.footer-container {
-  background: linear-gradient(90deg, #1565C0 0%, #1E88E5 80%, #1565C0 100%);
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 20px 20px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  @media (max-width: $tablet-breakpoint) {
+    width: $ring-width-mobile;
+    right: -$ring-width-mobile;
+  }
 }
-
 </style>
