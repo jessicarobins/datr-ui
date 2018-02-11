@@ -11,10 +11,10 @@
         :indices="indices"
         :spinning="spinning" />
       <div class="ring"></div>
-      <button
+      <div
         :disabled="disableButton"
         :class="handleClass"
-        @click="toggle"></button>
+        @click="toggle"></div>
     </div>
     <SlotMachineBottom>
       <slot name="footer"></slot>
@@ -161,6 +161,7 @@ $handle-width-mobile: 15px;
 }
 
 .handle {
+  cursor: pointer;
   position: absolute;
   height: 100%;
   right: -20px;
