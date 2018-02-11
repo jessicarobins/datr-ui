@@ -138,7 +138,7 @@ $handle-width-mobile: 15px;
 .slot-machine-container {
   width: 80vw;
   height: $height;
-  min-height: 790px;
+  min-height: 655px;
   display: flex;
   flex-direction: column;
   max-width: 1000px;
