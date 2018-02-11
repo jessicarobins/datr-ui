@@ -15,9 +15,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../styles/variables';
+
 .home {
   display: flex;
   justify-content: center;
+  background-color: $accent-lighten-5;
 }
 </style>

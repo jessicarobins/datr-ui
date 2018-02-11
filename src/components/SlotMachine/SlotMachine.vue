@@ -110,7 +110,6 @@ export default {
       await this.getPlaces()
       this.spinning = false
       if (this.selectedItems.length) {
-        console.log('selected items: ', this.selectedItems)
         const newIndices = []
         for (let i = 0; i < this.numWheels; i += 1) {
           this.items[i].splice(1, 0, this.selectedItems[i])

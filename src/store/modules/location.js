@@ -1,3 +1,4 @@
+import router from '@/router'
 import getLocation from '@/services/Geo'
 import api from '@/services/Api'
 import * as types from '../types'
@@ -18,10 +19,17 @@ const actions = {
       const { zipcode } = await api('/geo/zipcode', {
         params: { ...state.coords }
       })
-      commit(types.SET_ZIPCODE, zipcode)
+      await dispatch('setZipcode', { zipcode })
     } catch (err) {
       commit(types.SET_SYSTEM_ERROR, err)
     }
+  },
+  setZipcode({ commit }, { zipcode, updateRouter = true }) {
+    commit(types.SET_ZIPCODE, zipcode)
+    if (updateRouter) {
+      router.push({ params: { zipcode } })
+    }
+    commit(types.SET_SYSTEM_MESSAGE, 'pull handle to play')
   }
 }
 

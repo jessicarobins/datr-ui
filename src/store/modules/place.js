@@ -1,3 +1,4 @@
+import router from '@/router'
 import api from '@/services/Api'
 import * as types from '../types'
 
@@ -18,6 +19,7 @@ const actions = {
         params
       })
       commit(types.GET_PLACES, place)
+      router.push({ params: { zipcode } })
     } catch (err) {
       commit(types.RESET_PLACES)
       commit(types.SET_SYSTEM_ERROR, err)
