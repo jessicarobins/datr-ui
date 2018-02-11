@@ -29,7 +29,9 @@ const actions = {
     if (updateRouter) {
       router.push({ params: { zipcode } })
     }
-    commit(types.SET_SYSTEM_MESSAGE, 'pull handle to play')
+    if (zipcode) {
+      commit(types.SET_SYSTEM_MESSAGE, 'pull handle to play')
+    }
   }
 }
 
