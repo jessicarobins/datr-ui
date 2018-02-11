@@ -9,7 +9,7 @@ const actions = {
       const location = await getLocation()
       commit(types.GET_LOCATION, location)
     } catch (err) {
-      console.log(err)
+      commit(types.SET_SYSTEM_ERROR, err)
     }
   },
   async getZipcode({ state, dispatch, commit }) {
@@ -20,7 +20,7 @@ const actions = {
       })
       commit(types.SET_ZIPCODE, zipcode)
     } catch (err) {
-      console.log(err)
+      commit(types.SET_SYSTEM_ERROR, err)
     }
   }
 }

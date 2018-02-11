@@ -5,10 +5,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'SlotMachineMessage',
-  props: {
-    message: String
+  computed: {
+    ...mapState({
+      message: state => state.message.text
+    })
   }
 }
 </script>

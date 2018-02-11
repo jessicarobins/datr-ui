@@ -1,5 +1,5 @@
 import api from '@/services/Api'
-import { GET_PLACES } from '../types'
+import * as types from '../types'
 
 // actions
 const actions = {
@@ -17,19 +17,25 @@ const actions = {
       const place = await api('/places', {
         params
       })
-      commit(GET_PLACES, place)
+      commit(types.GET_PLACES, place)
     } catch (err) {
-      console.log(err)
+      commit(types.RESET_PLACES)
+      commit(types.SET_SYSTEM_ERROR, err)
     }
   }
 }
 
 // mutations
 const mutations = {
-  [GET_PLACES](state, { activity, food, night }) {
+  [types.GET_PLACES](state, { activity, food, night }) {
     state.activity = activity
     state.food = food
     state.night = night
+  },
+  [types.RESET_PLACES](state) {
+    state.activity = undefined
+    state.food = undefined
+    state.night = undefined
   }
 }
 

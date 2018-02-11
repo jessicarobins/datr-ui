@@ -2,7 +2,7 @@
   <SlotMachine
     :items="items"
     :getPlaces="getPlaces"
-    :placeItems="placeItems"
+    :selectedItems="selectedItems"
     :resetItems="resetItems"
     :canSpin="hasValidLocation">
     <AppHeader slot="header" />
@@ -42,7 +42,7 @@ export default {
     place() {
       return type => this.$store.getters.place(type)
     },
-    placeItems() {
+    selectedItems() {
       if (this.hasData) {
         return [
           this.place('food'),

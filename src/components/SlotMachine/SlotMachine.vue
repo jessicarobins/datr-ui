@@ -4,7 +4,7 @@
       <slot name="header"></slot>
     </SlotMachineTop>
     <div class="slot-machine-gradient-container">
-      <SlotMachineMessage :message="message" />
+      <SlotMachineMessage />
       <SlotMachineWheelContainer
         :num-wheels="numWheels"
         :items="items"
@@ -23,6 +23,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import { SET_SYSTEM_MESSAGE } from '@/store/types'
+
 import SlotMachineMessage from './SlotMachineMessage.vue'
 import SlotMachineTop from './SlotMachineTop.vue'
 import SlotMachineBottom from './SlotMachineBottom.vue'
@@ -40,14 +43,13 @@ export default {
     canSpin: Boolean,
     getPlaces: Function,
     items: Array,
-    placeItems: Array,
+    selectedItems: Array,
     resetItems: Function
   },
   data() {
     return {
       handleHalfDown: false,
       indices: [],
-      message: 'insert zip code to play',
       spinning: false
     }
   },
@@ -72,6 +74,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setMessage: SET_SYSTEM_MESSAGE
+    }),
     random() {
       return Math.floor(Math.random() * Math.floor(this.items.length))
     },
@@ -90,32 +95,32 @@ export default {
       if (this.canSpin) {
         this.makePlaceRequest()
       } else {
-        this.message = 'out of credits. insert zip code to play.'
+        this.setMessage('out of credits. insert zip code to play.')
         this.handleHalfDown = true
         setTimeout(() => {
           this.handleHalfDown = false
         }, 1500)
       }
     },
-    makePlaceRequest() {
+    async makePlaceRequest() {
       this.spinning = true
-      this.message = '...'
+      this.setMessage('...')
       this.resetItems()
       this.spin()
-      this.getPlaces()
-        .then(() => {
-          this.spinning = false
-          const newIndices = []
-          for (let i = 0; i < this.numWheels; i += 1) {
-            this.items[i].splice(1, 0, this.placeItems[i])
-            newIndices.push(1)
-          }
-
-          this.indices = newIndices
-          setTimeout(() => {
-            this.message = 'jackpot!'
-          }, 2000)
-        })
+      await this.getPlaces()
+      this.spinning = false
+      if (this.selectedItems.length) {
+        console.log('selected items: ', this.selectedItems)
+        const newIndices = []
+        for (let i = 0; i < this.numWheels; i += 1) {
+          this.items[i].splice(1, 0, this.selectedItems[i])
+          newIndices.push(1)
+        }
+        this.indices = newIndices
+        setTimeout(() => {
+          this.setMessage('jackpot!')
+        }, 2000)
+      }
     }
   }
 }
