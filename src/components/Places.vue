@@ -11,12 +11,15 @@
 </template>
 
 <script>
+import shuffle from 'lodash/shuffle'
 import { mapActions, mapGetters } from 'vuex'
 import AppHeader from './AppHeader.vue'
 import Place from './Place.vue'
 import SlotMachine from './SlotMachine/SlotMachine.vue'
 import Zipcode from './Zipcode.vue'
 import { foodIcons, activityIcons } from './SlotMachine/icons'
+
+const barIcons = shuffle(foodIcons)
 
 export default {
   name: 'Places',
@@ -31,7 +34,7 @@ export default {
       items: [
         [...foodIcons],
         [...activityIcons],
-        [...foodIcons]
+        [...barIcons]
       ]
     }
   },
@@ -65,7 +68,7 @@ export default {
       this.items = [
         [...foodIcons],
         [...activityIcons],
-        [...foodIcons]
+        [...barIcons]
       ]
     }
   }

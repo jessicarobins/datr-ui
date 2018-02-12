@@ -112,8 +112,9 @@ export default {
       if (this.selectedItems.length) {
         const newIndices = []
         for (let i = 0; i < this.numWheels; i += 1) {
-          this.items[i].splice(1, 0, this.selectedItems[i])
-          newIndices.push(1)
+          const r = this.random()
+          this.items[i].splice(r, 0, this.selectedItems[i])
+          newIndices.push(r)
         }
         this.indices = newIndices
         setTimeout(() => {
