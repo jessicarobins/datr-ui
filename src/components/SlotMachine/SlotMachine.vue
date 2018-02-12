@@ -16,7 +16,7 @@
         :class="handleClass"
         @click="toggle"></div>
     </div>
-    <SlotMachineBottom>
+    <SlotMachineBottom :has-jackpot="hasJackpot">
       <slot name="footer"></slot>
     </SlotMachineBottom>
   </div>
@@ -50,7 +50,8 @@ export default {
     return {
       handleHalfDown: false,
       indices: [],
-      spinning: false
+      spinning: false,
+      hasJackpot: false
     }
   },
   created() {
@@ -103,6 +104,7 @@ export default {
       }
     },
     async makePlaceRequest() {
+      this.hasJackpot = false
       this.spinning = true
       this.setMessage('...')
       this.resetItems()
@@ -118,7 +120,8 @@ export default {
         }
         this.indices = newIndices
         setTimeout(() => {
-          this.setMessage('jackpot!')
+          this.hasJackpot = true
+          this.setMessage('jackpot! collect ticket')
         }, 2000)
       }
     }

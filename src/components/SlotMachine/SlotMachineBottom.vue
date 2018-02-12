@@ -3,7 +3,7 @@
     <div class="footer-left">
     </div>
     <div class="footer-center">
-      <SlotMachineTicket />
+      <SlotMachineTicketContainer :has-jackpot="hasJackpot" />
     </div>
     <div class="footer-right">
       <slot></slot>
@@ -12,12 +12,15 @@
 </template>
 
 <script>
-import SlotMachineTicket from './SlotMachineTicket.vue'
+import SlotMachineTicketContainer from './SlotMachineTicketContainer.vue'
 
 export default {
   name: 'SlotMachineBottom',
   components: {
-    SlotMachineTicket
+    SlotMachineTicketContainer
+  },
+  props: {
+    hasJackpot: Boolean
   }
 }
 </script>
