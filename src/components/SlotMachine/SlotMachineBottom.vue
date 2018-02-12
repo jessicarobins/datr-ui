@@ -24,17 +24,16 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding: 0 20px 20px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: 5px;
   width: calc(100% + 30px);
   align-self: center;
   position: relative;
-  margin-top: 20px;
+  margin-top: 18px;
 
   &:after {
     content: '';
     position: absolute;
-    top: -34px;
+    top: -32px;
     left: 0;
     right: 0;
     border: 14px solid transparent;
