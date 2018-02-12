@@ -1,12 +1,24 @@
 <template>
   <div class="footer-container">
-    <slot></slot>
+    <div class="footer-left">
+    </div>
+    <div class="footer-center">
+      <SlotMachineTicket />
+    </div>
+    <div class="footer-right">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
+import SlotMachineTicket from './SlotMachineTicket.vue'
+
 export default {
-  name: 'SlotMachineBottom'
+  name: 'SlotMachineBottom',
+  components: {
+    SlotMachineTicket
+  }
 }
 </script>
 
@@ -40,6 +52,20 @@ export default {
     border-bottom: 20px solid $primary-darken-3;
     z-index: 0;
   }
+}
+
+.footer-left,
+.footer-right {
+  flex: .25;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-center {
+  flex: .5;
 }
 
 </style>
