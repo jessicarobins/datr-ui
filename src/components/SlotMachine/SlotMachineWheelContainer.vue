@@ -88,6 +88,7 @@ $inner-container-inset-width-mobile: 10px;
   border-radius: 20px;
   flex: 1;
   position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: $tablet-breakpoint) {

@@ -115,6 +115,7 @@ export default {
   height: 100%;
   margin: 0 $wheel-margin;
   justify-content: space-between;
+  overflow: hidden;
 
   @media (max-width: $tablet-breakpoint) {
     margin: 0 $wheel-margin-mobile;
