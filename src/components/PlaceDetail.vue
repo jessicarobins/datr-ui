@@ -23,10 +23,6 @@
         </div>
       </div>
     </div>
-    <div>
-      <span v-html="details.formatted_address" v-if="details.formatted_address" />
-      <span v-html="details.formatted_phone_number" v-if="details.formatted_phone_number" />
-    </div>
   </div>
 </template>
 
@@ -37,7 +33,8 @@ export default {
   name: 'PlaceDetail',
   props: {
     details: Object,
-    icon: String
+    icon: String,
+    svg: String
   },
   computed: {
     type() {

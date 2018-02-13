@@ -2,17 +2,12 @@
   <v-dialog value="true" v-if="open" max-width="600" scrollable>
     <v-card>
       <v-card-text class="text-xs-left">
-        <iframe
-          class="map"
-          width="600"
-          height="300"
-          frameborder="0" style="border:0"
-          :src="mapsUrl" allowfullscreen>
-        </iframe>
+        <Map :places="placeTypes" />
         <PlaceDetail
           :name="key"
           :details="value.details"
           :icon="value.icon"
+          :svg="value.svg"
           v-for="(value, key) in placeTypes"
           :key="key" />
       </v-card-text>
@@ -24,11 +19,16 @@
 </template>
 
 <script>
+import activitySvg from '@/assets/activity.svg'
+import barSvg from '@/assets/bar.svg'
+import restaurantSvg from '@/assets/restaurant.svg'
 import PlaceDetail from '../PlaceDetail.vue'
+import Map from '../Map.vue'
 
 export default {
   name: 'Ticket',
   components: {
+    Map,
     PlaceDetail
   },
   props: {
@@ -40,23 +40,23 @@ export default {
       return ({
         food: {
           icon: 'restaurant',
+          svg: restaurantSvg,
           details: this.place('food')
         },
         activity: {
           icon: 'local_activity',
+          svg: activitySvg,
           details: this.place('activity')
         },
         drinks: {
           icon: 'local_bar',
+          svg: barSvg,
           details: this.place('night')
         }
       })
     },
     place() {
       return type => this.$store.getters.place(type)
-    },
-    mapsUrl() {
-      return `https://www.google.com/maps/embed/v1/directions?key=${process.env.VUE_APP_GOOGLE_MAPS_EMBED_API_KEY}&origin=place_id:${this.placeTypes.food.details.place_id}&destination=place_id:${this.placeTypes.drinks.details.place_id}&waypoints=place_id:${this.placeTypes.activity.details.place_id}&mode=walking`
     }
   }
 }
