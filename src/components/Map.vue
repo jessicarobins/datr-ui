@@ -1,26 +1,25 @@
 <template>
-  <gmap-map ref="map" :center="center" :zoom="14" style="width: 100%; height: 300px">
+  <gmap-map ref="map" :center="center" :zoom="13" style="width: 100%; height: 300px">
     <gmap-marker
       :key="key"
       v-for="(value, key) in places"
       :place="place(value.details)"
-      :label="label(value.details)"
       :clickable="true"
-      :icon="icon(value.svg)"
+      :icon="icon(value.svgPath)"
       :title="value.details.name"
       @click="toggleInfoWindow(value.details, key)">
       <gmap-info-window
-        :opened="infoOpen(key)"
-        @closeclick="openInfoKey=null">
+        :opened="isSelected(key)"
+        @closeclick="setSelected(null)">
         <strong>
           <a
-            :href="infoContent.website"
+            :href="infoContent(key).website"
             target="_blank"
-            v-if="infoContent.website">{{ infoContent.name }}</a>
-          <span v-html="infoContent.name" v-else />
+            v-if="infoContent(key).website">{{ infoContent(key).name }}</a>
+          <span v-html="infoContent(key).name" v-else />
         </strong>
-        <div>{{ infoContent.formatted_address }}</div>
-        <div>{{ infoContent.formatted_phone_number }}</div>
+        <div>{{ infoContent(key).formatted_address }}</div>
+        <div>{{ infoContent(key).formatted_phone_number }}</div>
       </gmap-info-window>
     </gmap-marker>
   </gmap-map>
@@ -30,29 +29,26 @@
 export default {
   name: 'Map',
   props: {
-    places: Object
-  },
-  data() {
-    return {
-      openInfoKey: null,
-      infoContent: ''
-    }
+    places: Object,
+    isSelected: Function,
+    setSelected: Function
   },
   computed: {
     place() {
       return ({ place_id: placeId, geometry: { location } }) => ({ placeId, location })
     },
     icon() {
-      return svg => ({
-        url: svg,
-        labelOrigin: new window.google.maps.Point(15, 30)
+      return svgPath => ({
+        fillColor: this.$vuetify.theme.primary,
+        fillOpacity: 1,
+        scale: 1.25,
+        strokeColor: 'white',
+        strokeWeight: 0.5,
+        path: svgPath
       })
     },
-    label() {
-      return ({ name }) => ({
-        fontWeight: 'bold',
-        text: name
-      })
+    infoContent() {
+      return key => this.places[key].details
     },
     infoOpen() {
       return key => (this.openInfoKey === key)
@@ -74,11 +70,10 @@ export default {
   },
   methods: {
     toggleInfoWindow(details, key) {
-      this.infoContent = details
       if (this.openInfoKey === key) {
-        this.openInfoKey = null
+        this.setSelected(null)
       } else {
-        this.openInfoKey = key
+        this.setSelected(key)
       }
     }
   }

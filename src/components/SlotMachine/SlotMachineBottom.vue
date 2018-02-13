@@ -55,6 +55,10 @@ export default {
     border-bottom: 20px solid $primary-darken-3;
     z-index: 0;
   }
+
+  @media (max-width: $tablet-breakpoint) {
+    flex-direction: column-reverse;
+  }
 }
 
 .footer-left,

@@ -81,6 +81,19 @@ export default {
   }
 }
 
+@media (max-width: $tablet-breakpoint) {
+  .ticket-slot {
+    align-self: center;
+    height: 20px;
+    max-width: 275px;
+    width: 100%;
+
+    .ticket {
+      top: -85px;
+    }
+  }
+}
+
 .message {
   display: flex;
   align-items: baseline;
@@ -93,10 +106,10 @@ export default {
     color: $gray-lighten-5;
     font-size: 24px;
     text-shadow: 1px 1px 2px $gray-darken-3;
-  }
 
-  @media (max-width: $tablet-breakpoint) {
-    font-size: 3vw;
+    @media (max-width: $tablet-breakpoint) {
+      font-size: 16px;
+    }
   }
 }
 

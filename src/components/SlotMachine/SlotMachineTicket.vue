@@ -2,13 +2,18 @@
   <v-dialog value="true" v-if="open" max-width="600" scrollable>
     <v-card>
       <v-card-text class="text-xs-left">
-        <Map :places="placeTypes" />
+        <Map
+          :places="placeTypes"
+          :set-selected="setSelected"
+          :is-selected="isSelected" />
         <PlaceDetail
+          v-for="(value, key) in placeTypes"
           :name="key"
           :details="value.details"
           :icon="value.icon"
           :svg="value.svg"
-          v-for="(value, key) in placeTypes"
+          :selected="isSelected(key)"
+          :set-selected="setSelected.bind(this, key)"
           :key="key" />
       </v-card-text>
       <v-card-actions>
@@ -19,9 +24,7 @@
 </template>
 
 <script>
-import activitySvg from '@/assets/activity.svg'
-import barSvg from '@/assets/bar.svg'
-import restaurantSvg from '@/assets/restaurant.svg'
+import { activitySvg, restaurantSvg, barSvg } from './icons'
 import PlaceDetail from '../PlaceDetail.vue'
 import Map from '../Map.vue'
 
@@ -35,28 +38,48 @@ export default {
     open: Boolean,
     toggle: Function
   },
+  data() {
+    return {
+      selected: null
+    }
+  },
+  methods: {
+    setSelected(selected) {
+      this.selected = selected
+    }
+  },
+  watch: {
+    open(value) {
+      if (!value) {
+        this.selected = null
+      }
+    }
+  },
   computed: {
     placeTypes() {
       return ({
         food: {
           icon: 'restaurant',
-          svg: restaurantSvg,
+          svgPath: restaurantSvg,
           details: this.place('food')
         },
         activity: {
           icon: 'local_activity',
-          svg: activitySvg,
+          svgPath: activitySvg,
           details: this.place('activity')
         },
         drinks: {
           icon: 'local_bar',
-          svg: barSvg,
+          svgPath: barSvg,
           details: this.place('night')
         }
       })
     },
     place() {
       return type => this.$store.getters.place(type)
+    },
+    isSelected() {
+      return type => this.selected === type
     }
   }
 }

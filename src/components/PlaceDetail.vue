@@ -1,8 +1,13 @@
 <template>
-  <div class="place-detail mb-2 mt-2">
+  <div class="place-detail mb-2 mt-2 hidden-sm-and-down">
     <div class="header">
-      <v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon>
-      <h3 class="mr-2">{{ type }}:</h3>
+      <v-chip
+        :selected="selected"
+        @click="setSelected"
+        color="blue"
+        text-color="white">
+        <v-icon left v-if="icon">{{ icon }}</v-icon>{{ type }}
+      </v-chip>
       <h2 class="title">
         <a :href="details.website" target="_blank" v-if="details.website">{{ details.name }}</a>
         <span v-html="details.name" v-else />
@@ -34,7 +39,9 @@ export default {
   props: {
     details: Object,
     icon: String,
-    svg: String
+    svgPath: String,
+    selected: Boolean,
+    setSelected: Function
   },
   computed: {
     type() {
@@ -50,6 +57,15 @@ export default {
 .header {
   display: flex;
   align-items: center;
+}
+
+.place-detail {
+  overflow-x: hidden;
+}
+
+.chip,
+h3 {
+  flex-shrink: 0;
 }
 
 .rating {
