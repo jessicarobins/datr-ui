@@ -1,8 +1,8 @@
 <template>
   <div class="slot-machine-ticket-container">
-    <div :class="ticketClass" @click="toggleTicket">
+    <button :class="ticketClass" @click="toggleTicket" :disabled="!hasJackpot">
       <div class="ticket"></div>
-    </div>
+    </button>
     <div class="message">
       <v-icon>arrow_upward</v-icon>
       <span>collect ticket</span>

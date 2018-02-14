@@ -12,7 +12,6 @@
         :spinning="spinning" />
       <div class="ring"></div>
       <div
-        :disabled="disableButton"
         :class="handleClass"
         @click="toggle"></div>
     </div>
@@ -94,14 +93,16 @@ export default {
       this.indices = this.newIndices
     },
     toggle() {
-      if (this.canSpin) {
-        this.makePlaceRequest()
-      } else {
-        this.setMessage('out of credits. insert zip code to play.')
-        this.handleHalfDown = true
-        setTimeout(() => {
-          this.handleHalfDown = false
-        }, 1500)
+      if (!this.disableButton) {
+        if (this.canSpin) {
+          this.makePlaceRequest()
+        } else {
+          this.setMessage('out of credits. insert zip code to play.')
+          this.handleHalfDown = true
+          setTimeout(() => {
+            this.handleHalfDown = false
+          }, 1500)
+        }
       }
     },
     async makePlaceRequest() {
