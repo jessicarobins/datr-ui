@@ -43,7 +43,7 @@ export default {
     canSpin: Boolean,
     getPlaces: Function,
     items: Array,
-    selectedItems: Array,
+    selectedItems: Function,
     resetItems: Function
   },
   data() {
@@ -111,11 +111,11 @@ export default {
       this.spin()
       await this.getPlaces()
       this.spinning = false
-      if (this.selectedItems.length) {
+      if (this.selectedItems().length) {
         const newIndices = []
         for (let i = 0; i < this.numWheels; i += 1) {
           const r = this.random()
-          this.items[i].splice(r, 0, this.selectedItems[i])
+          this.items[i].splice(r, 0, this.selectedItems()[i])
           newIndices.push(r)
         }
         this.indices = newIndices

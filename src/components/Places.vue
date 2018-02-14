@@ -45,6 +45,14 @@ export default {
     place() {
       return type => this.$store.getters.place(type)
     },
+    ...mapGetters([
+      'hasValidLocation'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'getPlaces'
+    ]),
     selectedItems() {
       if (this.hasData) {
         return [
@@ -56,14 +64,6 @@ export default {
 
       return []
     },
-    ...mapGetters([
-      'hasValidLocation'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'getPlaces'
-    ]),
     resetItems() {
       this.items = [
         [...foodIcons],
