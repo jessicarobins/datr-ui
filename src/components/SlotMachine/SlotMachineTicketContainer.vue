@@ -1,7 +1,7 @@
 <template>
   <div class="slot-machine-ticket-container">
-    <div class="ticket-slot">
-      <div :class="ticketClass" @click="toggleTicket"></div>
+    <div :class="ticketClass" @click="toggleTicket">
+      <div class="ticket"></div>
     </div>
     <div class="message">
       <v-icon>arrow_upward</v-icon>
@@ -33,7 +33,7 @@ export default {
   computed: {
     ticketClass() {
       return {
-        ticket: true,
+        'ticket-slot': true,
         down: this.hasJackpot
       }
     }
@@ -65,6 +65,16 @@ export default {
   position: relative;
   overflow: hidden;
 
+  &.down {
+    animation: $pulse-animation;
+    cursor: pointer;
+    z-index: 1;
+
+    .ticket {
+      transform: translateY(50px);
+    }
+  }
+
   .ticket {
     border: 28px solid transparent;
     border-bottom: 20px solid white;
@@ -73,11 +83,6 @@ export default {
     right: 0;
     top: -50px;
     transition: transform 0.2s ease;
-
-    &.down {
-      cursor: pointer;
-      transform: translateY(50px);
-    }
   }
 }
 

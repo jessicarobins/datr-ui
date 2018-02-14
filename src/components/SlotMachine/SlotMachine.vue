@@ -67,7 +67,8 @@ export default {
       return {
         handle: true,
         down: this.spinning,
-        'half-down': this.handleHalfDown
+        'half-down': this.handleHalfDown,
+        clickable: !this.disableButton
       }
     },
     numWheels() {
@@ -147,6 +148,10 @@ $handle-width-mobile: 15px;
   flex-direction: column;
   max-width: 1000px;
   position: relative;
+
+  @media (max-width: $tablet-breakpoint) {
+    min-height: 590px;
+  }
 }
 
 .slot-machine-gradient-container {
@@ -215,11 +220,18 @@ $handle-width-mobile: 15px;
     $blue-darken-4 100%
   );
   transform-origin: bottom center;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 
   @media (max-width: $tablet-breakpoint) {
     width: 40px;
     height: 40px;
+  }
+}
+
+.handle.clickable:not(.down) {
+  &:before,
+  &:after {
+    animation: $pulse-animation;
   }
 }
 
