@@ -2,6 +2,8 @@
 $phone-breakpoint: 425px;
 $tablet-breakpoint: 768px;
 
+$accent-font: 'Orbitron', sans-serif;
+
 /* colors */
 $gray-lighten-1: #BDBDBD;
 $gray-lighten-5: #FAFAFA;
@@ -51,5 +53,7 @@ $silver-border-outset: 2px outset $gray-lighten-1;
 
 $wheel-margin: 16px;
 $wheel-margin-mobile: 10px;
+$inner-container-inset-width: 30px;
+$inner-container-inset-width-mobile: 10px;
 
 $pulse-animation: pulse 2s infinite;

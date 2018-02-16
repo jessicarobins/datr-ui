@@ -9,14 +9,23 @@
         :num-wheels="numWheels"
         :items="items"
         :indices="indices"
-        :spinning="spinning" />
+        :spinning="spinning">
+      </SlotMachineWheelContainer>
       <div class="ring"></div>
       <div
         :class="handleClass"
         @click="toggle"></div>
     </div>
     <SlotMachineBottom :has-jackpot="hasJackpot">
-      <slot name="footer"></slot>
+      <div slot="footer-left" class="button-container">
+        <ActionButton
+          class="hidden-sm-and-down"
+          :on-click="toggle"
+          :disabled="disableButton"
+          label="spin" />
+        <slot name="footer-left"></slot>
+      </div>
+      <slot name="footer-right" slot="footer-right"></slot>
     </SlotMachineBottom>
   </div>
 </template>
@@ -25,6 +34,7 @@
 import { mapMutations } from 'vuex'
 import { SET_SYSTEM_MESSAGE } from '@/store/types'
 
+import ActionButton from '../ActionButton.vue'
 import SlotMachineMessage from './SlotMachineMessage.vue'
 import SlotMachineTop from './SlotMachineTop.vue'
 import SlotMachineBottom from './SlotMachineBottom.vue'
@@ -33,6 +43,7 @@ import SlotMachineWheelContainer from './SlotMachineWheelContainer.vue'
 export default {
   name: 'SlotMachine',
   components: {
+    ActionButton,
     SlotMachineBottom,
     SlotMachineMessage,
     SlotMachineTop,
@@ -168,6 +179,11 @@ $handle-width-mobile: 15px;
   @media (max-width: $tablet-breakpoint) {
     padding: $silver-width-mobile;
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
 
 .handle {

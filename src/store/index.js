@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import location from './modules/location'
 import place from './modules/place'
 import message from './modules/systemMessage'
+import filters from './modules/filters'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     location,
     message,
-    place
+    place,
+    filters
   }
 })

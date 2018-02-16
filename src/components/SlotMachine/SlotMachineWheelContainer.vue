@@ -8,7 +8,7 @@
         :index="indices[n - 1]"
         :spinning="spinning" />
     </div>
-    <div class="bars"></div>
+    <slot></slot>
   </div>
 </template>
 
@@ -33,10 +33,24 @@ export default {
 <style scoped lang="scss">
 @import '../../styles/variables';
 $bg-color: $gray-darken-4;
-$inner-container-inset-width: 30px;
-$inner-container-inset-width-mobile: 10px;
 
-.bars {
+.slot-machine-wheel-container {
+  background-color: $gray-darken-4;
+  border: $inner-container-inset-width inset $gray-lighten-1;
+  border-radius: 20px;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: $tablet-breakpoint) {
+  .slot-machine-wheel-container {
+    border-width: $inner-container-inset-width-mobile;
+  }
+}
+
+.slot-machine-wheel-container:after {
   content: '';
   position: absolute;
   top: -$inner-container-inset-width;
@@ -79,21 +93,6 @@ $inner-container-inset-width-mobile: 10px;
         transparent calc(66.66666% + #{$wheel-margin-mobile}),
         transparent 100%
       );
-  }
-}
-
-.slot-machine-wheel-container {
-  background-color: $gray-darken-4;
-  border: $inner-container-inset-width inset $gray-lighten-1;
-  border-radius: 20px;
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-@media (max-width: $tablet-breakpoint) {
-  .slot-machine-wheel-container {
-    border-width: $inner-container-inset-width-mobile;
   }
 }
 

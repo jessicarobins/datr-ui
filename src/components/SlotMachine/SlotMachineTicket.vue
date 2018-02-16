@@ -1,5 +1,5 @@
 <template>
-  <v-dialog value="true" v-if="open" max-width="600" scrollable>
+  <v-dialog value="true" max-width="600" scrollable>
     <v-card>
       <v-card-text class="text-xs-left">
         <Map
@@ -61,7 +61,7 @@ export default {
         food: {
           icon: 'restaurant',
           svgPath: restaurantSvg,
-          details: this.place('food')
+          details: this.place('restaurant')
         },
         activity: {
           icon: 'local_activity',
@@ -71,7 +71,7 @@ export default {
         drinks: {
           icon: 'local_bar',
           svgPath: barSvg,
-          details: this.place('night')
+          details: this.place('bar')
         }
       })
     },

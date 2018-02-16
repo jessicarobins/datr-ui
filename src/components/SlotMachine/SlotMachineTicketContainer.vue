@@ -9,6 +9,7 @@
       <v-icon>arrow_upward</v-icon>
     </div>
     <SlotMachineTicket
+      v-if="ticketOpen"
       :open="ticketOpen"
       :toggle="toggleTicket" />
   </div>
@@ -51,7 +52,6 @@ export default {
 @import '../../styles/variables';
 
 .slot-machine-ticket-container {
-  height: 100%;
   margin-top: 5px;
   display: flex;
   flex-direction: column;
@@ -62,6 +62,7 @@ export default {
   border: $dark-border;
   border-radius: 10px;
   flex: 1;
+  height: 55px;
   position: relative;
   overflow: hidden;
 

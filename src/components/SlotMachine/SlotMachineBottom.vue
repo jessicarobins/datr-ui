@@ -1,12 +1,13 @@
 <template>
   <div class="footer-container">
     <div class="footer-left">
+      <slot name="footer-left"></slot>
     </div>
     <div class="footer-center">
       <SlotMachineTicketContainer :has-jackpot="hasJackpot" />
     </div>
     <div class="footer-right">
-      <slot></slot>
+      <slot name="footer-right" class="footer-right"></slot>
     </div>
   </div>
 </template>
@@ -30,13 +31,16 @@ export default {
 @import '../../styles/variables';
 
 .footer-container {
+  align-items: center;
   background: linear-gradient(
     90deg,
     $primary-darken-3 0%,
     $primary-darken-1 80%,
     $primary-darken-3 100%
   );
-  display: flex;
+  display: grid;
+  grid-gap: 10px 10px;
+  grid-template-columns: 1fr 2fr 1fr;
   justify-content: flex-end;
   padding: 0 20px 20px;
   border-radius: 5px;
@@ -57,22 +61,33 @@ export default {
   }
 
   @media (max-width: $tablet-breakpoint) {
-    flex-direction: column-reverse;
+    grid-template-columns: 1fr 1fr;
+
+    .footer-left {
+      grid-column: 1 / span 1;
+      grid-row: 1 / span 1;
+    }
+
+    .footer-right {
+      grid-column: 2 / span 1;
+      grid-row: 1 / span 1;
+    }
+
+    .footer-center {
+      grid-column: 1 / span 2;
+      grid-row: 2 / span 1;
+    }
   }
 }
 
-.footer-left,
-.footer-right {
-  flex: .25;
+.footer-left {
+  grid-column: 1 / span 1;
 }
 
 .footer-right {
+  grid-column: 3 / span 1;
   display: flex;
-  justify-content: flex-end;
-}
-
-.footer-center {
-  flex: .5;
+  justify-content: center;
 }
 
 </style>

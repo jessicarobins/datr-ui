@@ -6,17 +6,24 @@
     :resetItems="resetItems"
     :canSpin="hasValidLocation">
     <AppHeader slot="header" />
-    <Zipcode slot="footer" />
+    <div slot="footer-left">
+      <ActionButton
+        label="filters"
+        :on-click="openOverlay" />
+    </div>
+    <Zipcode slot="footer-right" />
   </SlotMachine>
 </template>
 
 <script>
 import shuffle from 'lodash/shuffle'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import * as types from '@/store/types'
 import AppHeader from './AppHeader.vue'
 import Place from './Place.vue'
 import SlotMachine from './SlotMachine/SlotMachine.vue'
 import Zipcode from './Zipcode.vue'
+import ActionButton from './ActionButton.vue'
 import { foodIcons, activityIcons } from './SlotMachine/icons'
 
 const barIcons = shuffle(foodIcons)
@@ -25,6 +32,7 @@ export default {
   name: 'Places',
   components: {
     AppHeader,
+    ActionButton,
     Place,
     SlotMachine,
     Zipcode
@@ -40,7 +48,7 @@ export default {
   },
   computed: {
     hasData() {
-      return this.place('food') && this.place('activity') && this.place('night')
+      return this.place('restaurant') && this.place('activity') && this.place('bar')
     },
     place() {
       return type => this.$store.getters.place(type)
@@ -53,12 +61,15 @@ export default {
     ...mapActions([
       'getPlaces'
     ]),
+    ...mapMutations({
+      openOverlay: types.TOGGLE_OVERLAY
+    }),
     selectedItems() {
       if (this.hasData) {
         return [
-          this.place('food'),
+          this.place('restaurant'),
           this.place('activity'),
-          this.place('night')
+          this.place('bar')
         ]
       }
 

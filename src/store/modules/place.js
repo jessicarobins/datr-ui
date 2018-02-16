@@ -6,12 +6,14 @@ import * as types from '../types'
 const actions = {
   async getPlaces({ commit, rootState }) {
     const { coords, zipcode } = rootState.location
-    let params
+    const { categories, radius } = rootState.filters
+
+    let params = { categories, radius }
 
     if (coords.latitude && coords.longitude) {
-      params = coords
+      params = { ...params, ...coords }
     } else {
-      params = { zipcode }
+      params = { ...params, zipcode }
     }
 
     try {
@@ -29,23 +31,23 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.GET_PLACES](state, { activity, food, night }) {
+  [types.GET_PLACES](state, { activity, restaurant, bar }) {
     state.activity = activity
-    state.food = food
-    state.night = night
+    state.restaurant = restaurant
+    state.bar = bar
   },
   [types.RESET_PLACES](state) {
     state.activity = undefined
-    state.food = undefined
-    state.night = undefined
+    state.restaurant = undefined
+    state.bar = undefined
   }
 }
 
 // initial state
 const state = {
   activity: undefined,
-  food: undefined,
-  night: undefined
+  restaurant: undefined,
+  bar: undefined
 }
 
 export default {

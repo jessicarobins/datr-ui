@@ -29,4 +29,9 @@ $pulse-color: $accent-4;
     box-shadow: 0 0 0 0 rgba($pulse-color, 0);
   }
 }
+
+.accent-font {
+  font-family: $accent-font;
+  text-transform: uppercase;
+}
 </style>
